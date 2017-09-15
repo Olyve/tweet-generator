@@ -1,3 +1,5 @@
+#!python3
+
 # This file is used to print out a specified number of random words
 # from the the system dictionary.
 from random import randint
