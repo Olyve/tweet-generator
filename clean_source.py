@@ -1,6 +1,7 @@
 #!python3
 
 from sys import argv
+import re
 
 
 def remove_chars(text):
@@ -25,6 +26,7 @@ if __name__ == '__main__':
     open_file.close()
 
     source = replace_with_space(remove_chars(source))
+    source = re.sub('\s{2,}', ' ', source)
 
     filename = arguments[0].split('.')[0] + '_cleaned.txt'
     test_file = open(filename, 'w')
