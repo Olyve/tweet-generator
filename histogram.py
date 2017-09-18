@@ -37,10 +37,10 @@ if __name__ == '__main__':
     filename = argv[1]
     source = open(filename, 'r').read()
 
-    histogram = create_histogram(source)
+    graph = create_histogram(source)
     output_file = open('./histogram_data.txt', 'w')
-    for key in sorted(histogram.keys()):
-        output_file.write(key + " " + str(histogram[key]) + '\n')
+    for key in sorted(graph.keys()):
+        output_file.write(key + " " + str(graph[key]) + '\n')
     output_file.close()
 
     print(unique_words(source))
