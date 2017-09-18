@@ -6,9 +6,9 @@ from random import randint
 from sys import argv
 
 
-def random_sentence(int):
+def random_sentence(num):
     sentence = ''
-    for _ in range(0, int):
+    for _ in range(0, num):
         sentence += (get_random_word() + ' ')
     return sentence
 

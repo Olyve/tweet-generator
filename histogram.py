@@ -2,8 +2,6 @@
 
 from sys import argv
 
-phrase = "one fish two fish red fish blue fish"
-
 
 def create_histogram(text):
     histogram = {}
@@ -26,12 +24,6 @@ def frequency(word, histogram):
     else:
         return 0
 
-
-# test_hist = create_histogram(phrase)
-# print(test_hist)
-# print(unique_words(test_hist))
-# print(frequency('fish', test_hist))
-# print(frequency('human', test_hist))
 
 if __name__ == '__main__':
     filename = argv[1]
