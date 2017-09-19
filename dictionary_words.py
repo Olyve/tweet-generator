@@ -1,12 +1,12 @@
 #!python3
 
-# This file is used to print out a specified number of random words
-# from the the system dictionary.
+"""Used to print out a specified number of random words from the the system dictionary."""
 from random import randint
 from sys import argv
 
 
 def random_sentence(num):
+    """Generates and returns a sentence of random words using get_random_word()."""
     sentence = ''
     for _ in range(0, num):
         sentence += (get_random_word() + ' ')
@@ -14,15 +14,13 @@ def random_sentence(num):
 
 
 def get_random_word():
+    """Returns a random word from the system dictionary."""
     words = get_sys_dictionary()
-    return remove_trailing_sequence(words[randint(0, len(words) - 1)], '\n')
-
-
-def remove_trailing_sequence(string, seq):
-    return string.rstrip(seq)
+    return words[randint(0, len(words) - 1)].rstrip('\n')
 
 
 def get_sys_dictionary():
+    """Creates a list of all the words in the system dictionary."""
     dictionary_path = '/usr/share/dict/words'
     return open(dictionary_path).readlines()
 
