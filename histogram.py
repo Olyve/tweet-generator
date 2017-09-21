@@ -1,5 +1,6 @@
 #!python3
 
+"""Generates a histogram and outputs the results in a text file."""
 from sys import argv
 
 
@@ -19,10 +20,11 @@ def unique_words(histogram):
 
 
 def frequency(word, histogram):
-    if word in histogram:
-        return histogram[word]
-    else:
-        return 0
+    if word is not None:
+        if word in histogram:
+            return histogram[word]
+        else:
+            return 0
 
 
 if __name__ == '__main__':
@@ -30,7 +32,7 @@ if __name__ == '__main__':
     source = open(filename, 'r').read()
 
     graph = create_histogram(source)
-    output_file = open('./histogram_data.txt', 'w')
+    output_file = open('./graph_data.txt', 'w')
     for key in sorted(graph.keys()):
         output_file.write(key + " " + str(graph[key]) + '\n')
     output_file.close()
