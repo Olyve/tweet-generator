@@ -32,7 +32,7 @@ if __name__ == '__main__':
     source = open(filename, 'r').read()
 
     graph = create_histogram(source)
-    output_file = open('./graph_data.txt', 'w')
+    output_file = open('./test_graph_data.txt', 'w')
     for key in sorted(graph.keys()):
         output_file.write(key + " " + str(graph[key]) + '\n')
     output_file.close()

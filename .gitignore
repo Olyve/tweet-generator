@@ -4,3 +4,5 @@
 # Ignore build artifacts and virtual environment files
 venv
 __pycache__
+environment_vars.txt
+text-samples/original_corpus.txt

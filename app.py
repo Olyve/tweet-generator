@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return sample.generate_sentence('./text-samples/graph_data.txt', randint(6, 15))
+    return sample.generate_sentence('test_graph_data.txt', randint(6, 15))
 
 
 if __name__ == "__main__":
