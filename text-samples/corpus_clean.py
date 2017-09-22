@@ -11,12 +11,13 @@ def just_rick(source):
     new_source = open('./text-samples/corpus_cleaned.txt', 'w')
     for line in all_text:
         if re.match('Ricks*:', line) or re.match('Rick\s([A-z0-9()-]*)([\s0-9]*):', line):
-            line = re.sub('Ricks*:', '', line)
-            line = re.sub('Rick\s([A-z0-9()-]*)([\s0-9]*):', '', line)
-            line = re.sub('([([])[A-z.\s]*([)\]])', '', line)
+            line = re.sub('Ricks*:', ' ', line)
+            line = re.sub('Rick\s([A-z0-9()-]*)([\s0-9]*):', ' ', line)
+            line = re.sub('([([])[A-z.\s]*([)\]])', ' ', line)
+            line = re.sub('[\",*()?!/]|[.{1,1}]', ' ', line)
+            line = re.sub('\n', ' ', line)
             line = re.sub('\s{2,}', ' ', line)
-            line = re.sub('\n{2,}', '\n', line)
-            line = line.strip()
+            # line = line.strip()
             new_source.write(line)
     new_source.close()
 
