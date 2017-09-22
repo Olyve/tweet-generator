@@ -1,15 +1,15 @@
 #!python3
 
-from flask import Flask
 from random import randint
-import sample
+from flask import Flask
+from scripts import sample
 
 app = Flask(__name__)
 
 
 @app.route('/')
 def index():
-    return sample.generate_sentence('./graph_data.txt', randint(6, 15))
+    return sample.generate_sentence('./text-samples/graph_data.txt', randint(6, 15))
 
 
 if __name__ == "__main__":
