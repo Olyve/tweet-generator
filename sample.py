@@ -1,6 +1,5 @@
 #!python3
 
-from bisect import bisect_left
 from random import randint, random
 from sys import argv
 import time

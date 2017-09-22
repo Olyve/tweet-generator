@@ -1,2 +1,5 @@
 # Ignore the IDE stuff that is added for the project
 .idea/
+
+# Ignore build artifacts and virtual environment files
+venv
