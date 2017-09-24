@@ -5,4 +5,3 @@
 venv
 __pycache__
 environment_vars.txt
-text-samples/original_corpus.txt
