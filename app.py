@@ -1,15 +1,19 @@
 #!python3
 
-from random import randint
 from flask import Flask, render_template
-from scripts import sample
+from scripts.markov import Markov
 
 app = Flask(__name__)
 
 
 @app.route('/')
 def index():
-    quote = sample.generate_sentence('test_graph_data.txt', randint(6, 20))
+    _file = open('./resources/corpus_cleaned.txt', 'r')
+    lines = _file.readlines()
+    _file.close()
+
+    markov = Markov(lines)
+    quote = markov.generate_sentence()
     return render_template('index.html', quote=quote)
 
 

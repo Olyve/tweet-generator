@@ -1,5 +1,7 @@
 #!python3
 
+from random import random, randint
+
 
 class Dictogram(dict):
 
@@ -25,3 +27,18 @@ class Dictogram(dict):
     def count(self, item):
         """Return the count of the given item in this histogram, or 0"""
         return self.get(item, 0)
+
+    def get_random_word(self):
+        prob = random()
+        accumulator = 0.0
+        keys = list(self.keys())
+        current_key = None
+
+        while accumulator < prob:
+            current_key = keys.pop(randint(0, len(keys) - 1))
+            next_probability = self[current_key] / self.tokens
+            if accumulator + next_probability > prob:
+                break
+            else:
+                accumulator += next_probability
+        return current_key
