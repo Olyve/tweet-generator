@@ -4,13 +4,15 @@ from random import randint, random
 from sys import argv
 import time
 
+from dictogram import Dictogram
+
 
 def create_histogram(filename):
     f = open(filename, 'r')
     lines = f.readlines()
     f.close()
 
-    histogram = {}
+    histogram = Dictogram()
     for line in lines:
         line = line.rstrip('\n').split(' ')
         histogram[line[0]] = int(line[1])
@@ -25,6 +27,7 @@ def create_relative_probabilities(hist):
     return hist
 
 
+# This might be useful for getting random words to follow next word
 def get_random_word(hist):
     prob = random()
     accumulator = 0.0

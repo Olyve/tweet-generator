@@ -7,7 +7,7 @@ from sys import argv
 def create_histogram(text):
     histogram = {}
     for word in text.split(' '):
-        word = word.lower()
+        word = word.lower().strip()
         if word in histogram:
             histogram[word] += 1
         else:
