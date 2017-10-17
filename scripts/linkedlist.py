@@ -21,6 +21,7 @@ class LinkedList(object):
         """Initialize this linked list; append the given items, if any"""
         self.head = None           # O(1)
         self.tail = None           # O(1)
+        self.num_nodes = 0         # O(1)
         if iterable:               # O(1)
             for item in iterable:  # O(n)
                 self.append(item)  # O(1)
@@ -41,38 +42,35 @@ class LinkedList(object):
             current = current.next       # O(1)
         return result                    # O(1)
 
-    # Worst case: linear time, O(n)
-    # Best case: constant time, O(1)
+    # In all cases: constant time, O(1)
     def is_empty(self):
         """Return True if this linked list is empty, or False"""
-        return len(self.items()) == 0  # O(n + 1)
+        return self.num_nodes == 0  # O(1 + 1)
 
-    # Worst case: linear time, O(n)
-    # Best case: constant time, O(1)
+    # In all cases: constant time, O(1)
     def length(self):
-        """Return the length of this linked list by traversing its nodes"""
-        return len(self.items())  # O(n)
+        """Return the length of this linked list by returning number of nodes"""
+        return self.num_nodes  # O(1)
 
-    # Worst case: linear time, O(n)
-    # Best case: constant time, O(1)
+    # In all cases: constant time, O(1)
     def append(self, item):
         """Insert the given item at the tail of this linked list"""
         node = Node(item)              # O(1)
 
-        if self.is_empty():            # Best: O(1), Worst: O(n)
+        if self.num_nodes == 0:        # O(1)
             self.head = node           # O(1)
         else:
             self.tail.next = node      # O(1)
             node.previous = self.tail  # O(1)
 
         self.tail = node               # O(1)
+        self.length += 1               # O(1)
 
-    # Worst case: linear time, O(n)
-    # Best case: constant time, O(1)
+    # In all cases: constant time, O(1)
     def prepend(self, item):
         """Insert the given item at the head of this linked list"""
         node = Node(item)              # O(1)
-        if self.is_empty():            # Best: O(1), Worst: O(n)
+        if self.num_nodes:             # O(1)
             self.tail = node           # O(1)
         else:
             node.next = self.head      # O(1)
