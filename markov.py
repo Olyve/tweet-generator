@@ -2,10 +2,7 @@
 
 import re
 from random import randint
-from pprint import pprint
-
-from dictogram import Dictogram
-
+from scripts.dictogram import Dictogram
 
 START = '[START]'
 END = '[END]'
@@ -26,26 +23,24 @@ class Markov:
         """Takes a list of lines and processes them into nodes"""
         for sentence in iterable:
             # Cleaning stuff should be removed eventually
-            cleaned_sentence = sentence.rstrip('\n').lower()
+            cleaned_sentence = sentence.strip('\n').lower()
             cleaned_sentence = re.sub(r'[.!?]*', '', cleaned_sentence)
             words = list(cleaned_sentence.split(' '))
 
-            if len(words) < 3:
-                return
+            if len(words) < 2:
+                continue
 
-            self.update_node(('[START]',), words[0])  # first word
-            self.update_node(('[START]', words[0]), words[1])  # first and second words
+            self.update_node((START, None), words[0])  # first word
+            self.update_node((START, words[0]), words[1])  # first and second words
 
-            for index, word in enumerate(words):
-                # print(index, word)
-                if index == 0:
-                    self.update_node((word, words[1]), words[2])
-                elif index == len(words) - 2:
-                    self.update_node((word, words[-1]), '[END]')
-                elif index == len(words) - 1:
-                    pass  # Not really sure what to do here? Stems from very short sentences.
-                else:
-                    self.update_node((word, words[index + 1]), words[index + 2])
+            queue = [START, words[0], words[1]]
+
+            for index in range(2, len(words)):
+                # Shift queue
+                queue.append(END) if index == len(words) - 1 else queue.append(words[index])
+                queue.pop(0)
+
+                self.update_node((queue[0], queue[1]), queue[2])
 
     def update_node(self, pair, next_word):
         if pair in self.nodes:
@@ -56,24 +51,21 @@ class Markov:
     def get_next(self, previous_word, current_word):
         dictogram = self.nodes.get((previous_word, current_word), None)
         if dictogram is None:
-            return '[END]'
+            return END
         return dictogram.get_random_word()
 
     def generate_sentence(self):
         words = list()
-        # print('words:', words)
 
-        # TODO: Generate first word based on transitions from [START] state
-        starters = list(filter(lambda x: x[0] == '[START]', self.nodes.keys()))
-        first_word = starters[randint(0, len(starters) - 1)]
-        words.append(first_word[1])
+        first_word = self.get_next(START, None)
+        words.append(first_word)
 
-        second_word = self.get_next(*first_word)
-        words.append(second_word)  # Expand the tuple into both arguments
+        second_word = self.get_next(START, first_word)
+        words.append(second_word)
 
         while True:
             next_word = self.get_next(words[-2], words[-1])
-            if next_word == '[END]':
+            if next_word == END:
                 break
             words.append(next_word)
 
@@ -89,7 +81,7 @@ def main():
 
     markov = Markov(lines)
 
-    min_chars, max_chars = 30, 140
+    min_chars, max_chars = 25, 140
     sentence = markov.generate_sentence()
     while len(sentence) < min_chars or len(sentence) > max_chars:
         print('sentence too short/long, trying again...')

@@ -19,14 +19,14 @@ def clean_source(filename):
 
 def create_cleaned_filename(original_filename):
     file_path = original_filename.split('.txt')
-    new_filename = file_path[0] + '_cleaned.txt'
+    new_filename = './../' + file_path[0] + '_cleaned.txt'  # Assumes cleanup is in scripts folder
     return new_filename
 
 
 def remove_unwanted_text(original_file, cleaned_file):
     source_text = original_file.readlines()
-    rick_pattern = re.compile(r'((All|Doofus|Evil|Council|Pickle)\s)?(Ricks?)\s*([A-z0-9()-]*)([\s0-9]*):')
-    stage_directions = re.compile(r"([\(\[\*])[\w\d\s/'.]*([\)\]\*])")
+    stage_directions = re.compile(r"([\(\[\*])[\w\d\s/'.-]*([\)\]\*])")
+    rick_pattern = re.compile(r'(([A-z]*\s){0,2}|(Mr\.\s))([A-z]*)(([A-z0-9])?|([0-9]\s&\s[0-9])?|(\([A-z-0-9]*\))?):')
     pattern3 = re.compile(r'[",]|(\s(-+|\'+)\s)')
     ellipsis_pattern = re.compile(r'\.{3}')
     pattern5 = re.compile(r'(?<=[.!?])\s(?=[A-Z*])')

@@ -1,14 +1,14 @@
 #!python3
 
 from flask import Flask, render_template
-from scripts.markov import Markov
+from markov import Markov
 
 app = Flask(__name__)
 
 
 @app.route('/')
 def index():
-    _file = open('./resources/corpus_cleaned.txt', 'r')
+    _file = open('./corpus_cleaned.txt', 'r')
     lines = _file.readlines()
     _file.close()
 
