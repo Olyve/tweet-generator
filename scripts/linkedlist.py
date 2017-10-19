@@ -64,7 +64,7 @@ class LinkedList(object):
             node.previous = self.tail  # O(1)
 
         self.tail = node               # O(1)
-        self.length += 1               # O(1)
+        self.num_nodes += 1            # O(1)
 
     # In all cases: constant time, O(1)
     def prepend(self, item):
